@@ -1,0 +1,102 @@
+syntax = "proto3";
+package MyPackage;
+
+// 文件信息
+message FileInfo {
+    // 文件id
+    int64 fileId = 1;
+    // 文件大小
+    int64 fileSize = 2;
+    // 更新时间
+    int64 updateTime = 3;
+    // 文件名
+    string fileName = 4;
+}
+
+// 文件操作请求
+message FileOperateRequest {
+    // 要操作的文件信息
+    FileInfo info = 1;
+    // 缓存文件id
+    int64 cacheId = 2;
+}
+
+// 文件操作响应
+message FileOperateResponse {
+    // 操作后的文件信息
+    FileInfo info = 1;
+    // 操作结果
+    bool ok = 2;
+}
+
+// 文件搜索请求
+message FileSearchRequest {
+    // 搜索条件
+    string condition = 1;
+}
+
+// 文件搜索响应
+message FileSearchResponse {
+    // 搜索到的文件信息
+    repeated FileInfo infos = 1;
+    // 操作结果
+    bool ok = 2;
+}
+
+// 文件上传请求
+message FileUploadRequest {
+    oneof size {
+        // 文件大小
+        int64 fileSize = 1;
+        // 分片数据大小
+        int64 chunkSize = 2;
+    }
+    // 分片数据
+    bytes chunk = 3;
+}
+
+// 文件上传响应
+message FileUploadResponse {
+    // 文件id，为0表示失败
+    int64 cacheId = 1;
+}
+
+// 文件下载请求
+message FileDownloadRequest {
+    // 文件id
+    int64 fileId = 1;
+}
+
+// 文件下载响应
+message FileDownloadResponse {
+    oneof size {
+        // 文件大小
+        int64 fileSize = 1;
+        // 分片数据大小
+        int64 chunkSize = 2;
+    }
+    // 分片数据
+    bytes chunk = 3;
+}
+
+// 文件上传下载服务
+service MyFileService {
+    // 上传文件
+    rpc uploadFile (stream FileUploadRequest) returns (FileUploadResponse);
+    // 下载文件
+    rpc downloadFile (FileDownloadRequest) returns (stream FileDownloadResponse);
+}
+
+// 业务服务
+service MyOperateService {
+    // 新增文件
+    rpc insertFile (FileOperateRequest) returns (FileOperateResponse);
+    // 删除文件
+    rpc deleteFile (FileOperateRequest) returns (FileOperateResponse);
+    // 修改文件
+    rpc updateFile (FileOperateRequest) returns (FileOperateResponse);
+    // 查询文件
+    rpc selectFile (FileOperateRequest) returns (FileOperateResponse);
+    // 搜索文件
+    rpc searchFile (FileSearchRequest) returns (FileSearchResponse);
+}
