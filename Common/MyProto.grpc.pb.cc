@@ -339,5 +339,94 @@ MyOperateService::Service::~Service() {
 }
 
 
+static const char* MySyncService_method_names[] = {
+  "/MyPackage.MySyncService/getRecord",
+  "/MyPackage.MySyncService/syncRecord",
+};
+
+std::unique_ptr< MySyncService::Stub> MySyncService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
+  (void)options;
+  std::unique_ptr< MySyncService::Stub> stub(new MySyncService::Stub(channel, options));
+  return stub;
+}
+
+MySyncService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
+  : channel_(channel), rpcmethod_getRecord_(MySyncService_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
+  , rpcmethod_syncRecord_(MySyncService_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
+  {}
+
+::grpc::ClientReader< ::MyPackage::SyncRecordResponse>* MySyncService::Stub::getRecordRaw(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request) {
+  return ::grpc::internal::ClientReaderFactory< ::MyPackage::SyncRecordResponse>::Create(channel_.get(), rpcmethod_getRecord_, context, request);
+}
+
+void MySyncService::Stub::async::getRecord(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest* request, ::grpc::ClientReadReactor< ::MyPackage::SyncRecordResponse>* reactor) {
+  ::grpc::internal::ClientCallbackReaderFactory< ::MyPackage::SyncRecordResponse>::Create(stub_->channel_.get(), stub_->rpcmethod_getRecord_, context, request, reactor);
+}
+
+::grpc::ClientAsyncReader< ::MyPackage::SyncRecordResponse>* MySyncService::Stub::AsyncgetRecordRaw(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq, void* tag) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::MyPackage::SyncRecordResponse>::Create(channel_.get(), cq, rpcmethod_getRecord_, context, request, true, tag);
+}
+
+::grpc::ClientAsyncReader< ::MyPackage::SyncRecordResponse>* MySyncService::Stub::PrepareAsyncgetRecordRaw(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::MyPackage::SyncRecordResponse>::Create(channel_.get(), cq, rpcmethod_getRecord_, context, request, false, nullptr);
+}
+
+::grpc::ClientReader< ::MyPackage::SyncRecordResponse>* MySyncService::Stub::syncRecordRaw(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request) {
+  return ::grpc::internal::ClientReaderFactory< ::MyPackage::SyncRecordResponse>::Create(channel_.get(), rpcmethod_syncRecord_, context, request);
+}
+
+void MySyncService::Stub::async::syncRecord(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest* request, ::grpc::ClientReadReactor< ::MyPackage::SyncRecordResponse>* reactor) {
+  ::grpc::internal::ClientCallbackReaderFactory< ::MyPackage::SyncRecordResponse>::Create(stub_->channel_.get(), stub_->rpcmethod_syncRecord_, context, request, reactor);
+}
+
+::grpc::ClientAsyncReader< ::MyPackage::SyncRecordResponse>* MySyncService::Stub::AsyncsyncRecordRaw(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq, void* tag) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::MyPackage::SyncRecordResponse>::Create(channel_.get(), cq, rpcmethod_syncRecord_, context, request, true, tag);
+}
+
+::grpc::ClientAsyncReader< ::MyPackage::SyncRecordResponse>* MySyncService::Stub::PrepareAsyncsyncRecordRaw(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::MyPackage::SyncRecordResponse>::Create(channel_.get(), cq, rpcmethod_syncRecord_, context, request, false, nullptr);
+}
+
+MySyncService::Service::Service() {
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      MySyncService_method_names[0],
+      ::grpc::internal::RpcMethod::SERVER_STREAMING,
+      new ::grpc::internal::ServerStreamingHandler< MySyncService::Service, ::MyPackage::SyncRecordRequest, ::MyPackage::SyncRecordResponse>(
+          [](MySyncService::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::MyPackage::SyncRecordRequest* req,
+             ::grpc::ServerWriter<::MyPackage::SyncRecordResponse>* writer) {
+               return service->getRecord(ctx, req, writer);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      MySyncService_method_names[1],
+      ::grpc::internal::RpcMethod::SERVER_STREAMING,
+      new ::grpc::internal::ServerStreamingHandler< MySyncService::Service, ::MyPackage::SyncRecordRequest, ::MyPackage::SyncRecordResponse>(
+          [](MySyncService::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::MyPackage::SyncRecordRequest* req,
+             ::grpc::ServerWriter<::MyPackage::SyncRecordResponse>* writer) {
+               return service->syncRecord(ctx, req, writer);
+             }, this)));
+}
+
+MySyncService::Service::~Service() {
+}
+
+::grpc::Status MySyncService::Service::getRecord(::grpc::ServerContext* context, const ::MyPackage::SyncRecordRequest* request, ::grpc::ServerWriter< ::MyPackage::SyncRecordResponse>* writer) {
+  (void) context;
+  (void) request;
+  (void) writer;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status MySyncService::Service::syncRecord(::grpc::ServerContext* context, const ::MyPackage::SyncRecordRequest* request, ::grpc::ServerWriter< ::MyPackage::SyncRecordResponse>* writer) {
+  (void) context;
+  (void) request;
+  (void) writer;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+
 }  // namespace MyPackage
 

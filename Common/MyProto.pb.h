@@ -33,6 +33,7 @@
 #include "google/protobuf/message.h"
 #include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
+#include "google/protobuf/generated_enum_reflection.h"
 #include "google/protobuf/unknown_field_set.h"
 // @@protoc_insertion_point(includes)
 
@@ -83,6 +84,12 @@ extern FileUploadRequestDefaultTypeInternal _FileUploadRequest_default_instance_
 class FileUploadResponse;
 struct FileUploadResponseDefaultTypeInternal;
 extern FileUploadResponseDefaultTypeInternal _FileUploadResponse_default_instance_;
+class SyncRecordRequest;
+struct SyncRecordRequestDefaultTypeInternal;
+extern SyncRecordRequestDefaultTypeInternal _SyncRecordRequest_default_instance_;
+class SyncRecordResponse;
+struct SyncRecordResponseDefaultTypeInternal;
+extern SyncRecordResponseDefaultTypeInternal _SyncRecordResponse_default_instance_;
 }  // namespace MyPackage
 namespace google {
 namespace protobuf {
@@ -90,11 +97,425 @@ namespace protobuf {
 }  // namespace google
 
 namespace MyPackage {
+enum OperateType : int {
+  InsertFile = 0,
+  DeleteFile = 1,
+  UpdateFile = 2,
+  OperateType_INT_MIN_SENTINEL_DO_NOT_USE_ =
+      std::numeric_limits<::int32_t>::min(),
+  OperateType_INT_MAX_SENTINEL_DO_NOT_USE_ =
+      std::numeric_limits<::int32_t>::max(),
+};
+
+bool OperateType_IsValid(int value);
+extern const uint32_t OperateType_internal_data_[];
+constexpr OperateType OperateType_MIN = static_cast<OperateType>(0);
+constexpr OperateType OperateType_MAX = static_cast<OperateType>(2);
+constexpr int OperateType_ARRAYSIZE = 2 + 1;
+const ::google::protobuf::EnumDescriptor*
+OperateType_descriptor();
+template <typename T>
+const std::string& OperateType_Name(T value) {
+  static_assert(std::is_same<T, OperateType>::value ||
+                    std::is_integral<T>::value,
+                "Incorrect type passed to OperateType_Name().");
+  return OperateType_Name(static_cast<OperateType>(value));
+}
+template <>
+inline const std::string& OperateType_Name(OperateType value) {
+  return ::google::protobuf::internal::NameOfDenseEnum<OperateType_descriptor,
+                                                 0, 2>(
+      static_cast<int>(value));
+}
+inline bool OperateType_Parse(absl::string_view name, OperateType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<OperateType>(
+      OperateType_descriptor(), name, value);
+}
 
 // ===================================================================
 
 
 // -------------------------------------------------------------------
+
+class SyncRecordResponse final :
+    public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:MyPackage.SyncRecordResponse) */ {
+ public:
+  inline SyncRecordResponse() : SyncRecordResponse(nullptr) {}
+  ~SyncRecordResponse() override;
+  template<typename = void>
+  explicit PROTOBUF_CONSTEXPR SyncRecordResponse(::google::protobuf::internal::ConstantInitialized);
+
+  inline SyncRecordResponse(const SyncRecordResponse& from)
+      : SyncRecordResponse(nullptr, from) {}
+  SyncRecordResponse(SyncRecordResponse&& from) noexcept
+    : SyncRecordResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline SyncRecordResponse& operator=(const SyncRecordResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline SyncRecordResponse& operator=(SyncRecordResponse&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const SyncRecordResponse& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const SyncRecordResponse* internal_default_instance() {
+    return reinterpret_cast<const SyncRecordResponse*>(
+               &_SyncRecordResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    10;
+
+  friend void swap(SyncRecordResponse& a, SyncRecordResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(SyncRecordResponse* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() != nullptr &&
+        GetArena() == other->GetArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(SyncRecordResponse* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  SyncRecordResponse* New(::google::protobuf::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<SyncRecordResponse>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const SyncRecordResponse& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom( const SyncRecordResponse& from) {
+    SyncRecordResponse::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  ::size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::google::protobuf::internal::ParseContext* ctx) final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target, ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  ::google::protobuf::internal::CachedSize* AccessCachedSize() const final;
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(SyncRecordResponse* other);
+
+  private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() {
+    return "MyPackage.SyncRecordResponse";
+  }
+  protected:
+  explicit SyncRecordResponse(::google::protobuf::Arena* arena);
+  SyncRecordResponse(::google::protobuf::Arena* arena, const SyncRecordResponse& from);
+  public:
+
+  static const ClassData _class_data_;
+  const ::google::protobuf::Message::ClassData*GetClassData() const final;
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kMsgFieldNumber = 3,
+    kRecordTimeFieldNumber = 2,
+    kRecordTypeFieldNumber = 1,
+  };
+  // string msg = 3;
+  void clear_msg() ;
+  const std::string& msg() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_msg(Arg_&& arg, Args_... args);
+  std::string* mutable_msg();
+  PROTOBUF_NODISCARD std::string* release_msg();
+  void set_allocated_msg(std::string* value);
+
+  private:
+  const std::string& _internal_msg() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_msg(
+      const std::string& value);
+  std::string* _internal_mutable_msg();
+
+  public:
+  // int64 recordTime = 2;
+  void clear_recordtime() ;
+  ::int64_t recordtime() const;
+  void set_recordtime(::int64_t value);
+
+  private:
+  ::int64_t _internal_recordtime() const;
+  void _internal_set_recordtime(::int64_t value);
+
+  public:
+  // .MyPackage.OperateType recordType = 1;
+  void clear_recordtype() ;
+  ::MyPackage::OperateType recordtype() const;
+  void set_recordtype(::MyPackage::OperateType value);
+
+  private:
+  ::MyPackage::OperateType _internal_recordtype() const;
+  void _internal_set_recordtype(::MyPackage::OperateType value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:MyPackage.SyncRecordResponse)
+ private:
+  class _Internal;
+
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      2, 3, 0,
+      40, 2>
+      _table_;
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+
+        inline explicit constexpr Impl_(
+            ::google::protobuf::internal::ConstantInitialized) noexcept;
+        inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                              ::google::protobuf::Arena* arena);
+        inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                              ::google::protobuf::Arena* arena, const Impl_& from);
+    ::google::protobuf::internal::ArenaStringPtr msg_;
+    ::int64_t recordtime_;
+    int recordtype_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_MyProto_2eproto;
+};// -------------------------------------------------------------------
+
+class SyncRecordRequest final :
+    public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:MyPackage.SyncRecordRequest) */ {
+ public:
+  inline SyncRecordRequest() : SyncRecordRequest(nullptr) {}
+  ~SyncRecordRequest() override;
+  template<typename = void>
+  explicit PROTOBUF_CONSTEXPR SyncRecordRequest(::google::protobuf::internal::ConstantInitialized);
+
+  inline SyncRecordRequest(const SyncRecordRequest& from)
+      : SyncRecordRequest(nullptr, from) {}
+  SyncRecordRequest(SyncRecordRequest&& from) noexcept
+    : SyncRecordRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline SyncRecordRequest& operator=(const SyncRecordRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline SyncRecordRequest& operator=(SyncRecordRequest&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const SyncRecordRequest& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const SyncRecordRequest* internal_default_instance() {
+    return reinterpret_cast<const SyncRecordRequest*>(
+               &_SyncRecordRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    9;
+
+  friend void swap(SyncRecordRequest& a, SyncRecordRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(SyncRecordRequest* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() != nullptr &&
+        GetArena() == other->GetArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(SyncRecordRequest* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  SyncRecordRequest* New(::google::protobuf::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<SyncRecordRequest>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const SyncRecordRequest& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom( const SyncRecordRequest& from) {
+    SyncRecordRequest::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  ::size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::google::protobuf::internal::ParseContext* ctx) final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target, ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  ::google::protobuf::internal::CachedSize* AccessCachedSize() const final;
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(SyncRecordRequest* other);
+
+  private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() {
+    return "MyPackage.SyncRecordRequest";
+  }
+  protected:
+  explicit SyncRecordRequest(::google::protobuf::Arena* arena);
+  SyncRecordRequest(::google::protobuf::Arena* arena, const SyncRecordRequest& from);
+  public:
+
+  static const ClassData _class_data_;
+  const ::google::protobuf::Message::ClassData*GetClassData() const final;
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kAnchorTimeFieldNumber = 1,
+  };
+  // int64 anchorTime = 1;
+  void clear_anchortime() ;
+  ::int64_t anchortime() const;
+  void set_anchortime(::int64_t value);
+
+  private:
+  ::int64_t _internal_anchortime() const;
+  void _internal_set_anchortime(::int64_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:MyPackage.SyncRecordRequest)
+ private:
+  class _Internal;
+
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      0, 1, 0,
+      0, 2>
+      _table_;
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+
+        inline explicit constexpr Impl_(
+            ::google::protobuf::internal::ConstantInitialized) noexcept;
+        inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                              ::google::protobuf::Arena* arena);
+        inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                              ::google::protobuf::Arena* arena, const Impl_& from);
+    ::int64_t anchortime_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_MyProto_2eproto;
+};// -------------------------------------------------------------------
 
 class FileUploadResponse final :
     public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:MyPackage.FileUploadResponse) */ {
@@ -155,7 +576,7 @@ class FileUploadResponse final :
                &_FileUploadResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    1;
 
   friend void swap(FileUploadResponse& a, FileUploadResponse& b) {
     a.Swap(&b);
@@ -336,7 +757,7 @@ class FileUploadRequest final :
                &_FileUploadRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    0;
 
   friend void swap(FileUploadRequest& a, FileUploadRequest& b) {
     a.Swap(&b);
@@ -556,7 +977,7 @@ class FileSearchRequest final :
                &_FileSearchRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    7;
 
   friend void swap(FileSearchRequest& a, FileSearchRequest& b) {
     a.Swap(&b);
@@ -737,7 +1158,7 @@ class FileInfo final :
                &_FileInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    0;
+    4;
 
   friend void swap(FileInfo& a, FileInfo& b) {
     a.Swap(&b);
@@ -960,7 +1381,7 @@ class FileDownloadResponse final :
                &_FileDownloadResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    3;
 
   friend void swap(FileDownloadResponse& a, FileDownloadResponse& b) {
     a.Swap(&b);
@@ -1180,7 +1601,7 @@ class FileDownloadRequest final :
                &_FileDownloadRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    2;
 
   friend void swap(FileDownloadRequest& a, FileDownloadRequest& b) {
     a.Swap(&b);
@@ -1355,7 +1776,7 @@ class FileSearchResponse final :
                &_FileSearchResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    8;
 
   friend void swap(FileSearchResponse& a, FileSearchResponse& b) {
     a.Swap(&b);
@@ -1550,7 +1971,7 @@ class FileOperateResponse final :
                &_FileOperateResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    6;
 
   friend void swap(FileOperateResponse& a, FileOperateResponse& b) {
     a.Swap(&b);
@@ -1743,7 +2164,7 @@ class FileOperateRequest final :
                &_FileOperateRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    5;
 
   friend void swap(FileOperateRequest& a, FileOperateRequest& b) {
     a.Swap(&b);
@@ -1889,6 +2310,336 @@ class FileOperateRequest final :
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// FileUploadRequest
+
+// int64 fileSize = 1;
+inline bool FileUploadRequest::has_filesize() const {
+  return size_case() == kFileSize;
+}
+inline void FileUploadRequest::set_has_filesize() {
+  _impl_._oneof_case_[0] = kFileSize;
+}
+inline void FileUploadRequest::clear_filesize() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (size_case() == kFileSize) {
+    _impl_.size_.filesize_ = ::int64_t{0};
+    clear_has_size();
+  }
+}
+inline ::int64_t FileUploadRequest::filesize() const {
+  // @@protoc_insertion_point(field_get:MyPackage.FileUploadRequest.fileSize)
+  return _internal_filesize();
+}
+inline void FileUploadRequest::set_filesize(::int64_t value) {
+  _internal_set_filesize(value);
+  // @@protoc_insertion_point(field_set:MyPackage.FileUploadRequest.fileSize)
+}
+inline ::int64_t FileUploadRequest::_internal_filesize() const {
+  if (size_case() == kFileSize) {
+    return _impl_.size_.filesize_;
+  }
+  return ::int64_t{0};
+}
+inline void FileUploadRequest::_internal_set_filesize(::int64_t value) {
+  if (size_case() != kFileSize) {
+    clear_size();
+    set_has_filesize();
+  }
+  _impl_.size_.filesize_ = value;
+}
+
+// int64 chunkSize = 2;
+inline bool FileUploadRequest::has_chunksize() const {
+  return size_case() == kChunkSize;
+}
+inline void FileUploadRequest::set_has_chunksize() {
+  _impl_._oneof_case_[0] = kChunkSize;
+}
+inline void FileUploadRequest::clear_chunksize() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (size_case() == kChunkSize) {
+    _impl_.size_.chunksize_ = ::int64_t{0};
+    clear_has_size();
+  }
+}
+inline ::int64_t FileUploadRequest::chunksize() const {
+  // @@protoc_insertion_point(field_get:MyPackage.FileUploadRequest.chunkSize)
+  return _internal_chunksize();
+}
+inline void FileUploadRequest::set_chunksize(::int64_t value) {
+  _internal_set_chunksize(value);
+  // @@protoc_insertion_point(field_set:MyPackage.FileUploadRequest.chunkSize)
+}
+inline ::int64_t FileUploadRequest::_internal_chunksize() const {
+  if (size_case() == kChunkSize) {
+    return _impl_.size_.chunksize_;
+  }
+  return ::int64_t{0};
+}
+inline void FileUploadRequest::_internal_set_chunksize(::int64_t value) {
+  if (size_case() != kChunkSize) {
+    clear_size();
+    set_has_chunksize();
+  }
+  _impl_.size_.chunksize_ = value;
+}
+
+// bytes chunk = 3;
+inline void FileUploadRequest::clear_chunk() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.chunk_.ClearToEmpty();
+}
+inline const std::string& FileUploadRequest::chunk() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:MyPackage.FileUploadRequest.chunk)
+  return _internal_chunk();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void FileUploadRequest::set_chunk(Arg_&& arg,
+                                                     Args_... args) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.chunk_.SetBytes(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:MyPackage.FileUploadRequest.chunk)
+}
+inline std::string* FileUploadRequest::mutable_chunk() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_chunk();
+  // @@protoc_insertion_point(field_mutable:MyPackage.FileUploadRequest.chunk)
+  return _s;
+}
+inline const std::string& FileUploadRequest::_internal_chunk() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.chunk_.Get();
+}
+inline void FileUploadRequest::_internal_set_chunk(const std::string& value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.chunk_.Set(value, GetArena());
+}
+inline std::string* FileUploadRequest::_internal_mutable_chunk() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  return _impl_.chunk_.Mutable( GetArena());
+}
+inline std::string* FileUploadRequest::release_chunk() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:MyPackage.FileUploadRequest.chunk)
+  return _impl_.chunk_.Release();
+}
+inline void FileUploadRequest::set_allocated_chunk(std::string* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.chunk_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.chunk_.IsDefault()) {
+          _impl_.chunk_.Set("", GetArena());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:MyPackage.FileUploadRequest.chunk)
+}
+
+inline bool FileUploadRequest::has_size() const {
+  return size_case() != SIZE_NOT_SET;
+}
+inline void FileUploadRequest::clear_has_size() {
+  _impl_._oneof_case_[0] = SIZE_NOT_SET;
+}
+inline FileUploadRequest::SizeCase FileUploadRequest::size_case() const {
+  return FileUploadRequest::SizeCase(_impl_._oneof_case_[0]);
+}
+// -------------------------------------------------------------------
+
+// FileUploadResponse
+
+// int64 cacheId = 1;
+inline void FileUploadResponse::clear_cacheid() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.cacheid_ = ::int64_t{0};
+}
+inline ::int64_t FileUploadResponse::cacheid() const {
+  // @@protoc_insertion_point(field_get:MyPackage.FileUploadResponse.cacheId)
+  return _internal_cacheid();
+}
+inline void FileUploadResponse::set_cacheid(::int64_t value) {
+  _internal_set_cacheid(value);
+  // @@protoc_insertion_point(field_set:MyPackage.FileUploadResponse.cacheId)
+}
+inline ::int64_t FileUploadResponse::_internal_cacheid() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.cacheid_;
+}
+inline void FileUploadResponse::_internal_set_cacheid(::int64_t value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.cacheid_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// FileDownloadRequest
+
+// int64 fileId = 1;
+inline void FileDownloadRequest::clear_fileid() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.fileid_ = ::int64_t{0};
+}
+inline ::int64_t FileDownloadRequest::fileid() const {
+  // @@protoc_insertion_point(field_get:MyPackage.FileDownloadRequest.fileId)
+  return _internal_fileid();
+}
+inline void FileDownloadRequest::set_fileid(::int64_t value) {
+  _internal_set_fileid(value);
+  // @@protoc_insertion_point(field_set:MyPackage.FileDownloadRequest.fileId)
+}
+inline ::int64_t FileDownloadRequest::_internal_fileid() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.fileid_;
+}
+inline void FileDownloadRequest::_internal_set_fileid(::int64_t value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.fileid_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// FileDownloadResponse
+
+// int64 fileSize = 1;
+inline bool FileDownloadResponse::has_filesize() const {
+  return size_case() == kFileSize;
+}
+inline void FileDownloadResponse::set_has_filesize() {
+  _impl_._oneof_case_[0] = kFileSize;
+}
+inline void FileDownloadResponse::clear_filesize() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (size_case() == kFileSize) {
+    _impl_.size_.filesize_ = ::int64_t{0};
+    clear_has_size();
+  }
+}
+inline ::int64_t FileDownloadResponse::filesize() const {
+  // @@protoc_insertion_point(field_get:MyPackage.FileDownloadResponse.fileSize)
+  return _internal_filesize();
+}
+inline void FileDownloadResponse::set_filesize(::int64_t value) {
+  _internal_set_filesize(value);
+  // @@protoc_insertion_point(field_set:MyPackage.FileDownloadResponse.fileSize)
+}
+inline ::int64_t FileDownloadResponse::_internal_filesize() const {
+  if (size_case() == kFileSize) {
+    return _impl_.size_.filesize_;
+  }
+  return ::int64_t{0};
+}
+inline void FileDownloadResponse::_internal_set_filesize(::int64_t value) {
+  if (size_case() != kFileSize) {
+    clear_size();
+    set_has_filesize();
+  }
+  _impl_.size_.filesize_ = value;
+}
+
+// int64 chunkSize = 2;
+inline bool FileDownloadResponse::has_chunksize() const {
+  return size_case() == kChunkSize;
+}
+inline void FileDownloadResponse::set_has_chunksize() {
+  _impl_._oneof_case_[0] = kChunkSize;
+}
+inline void FileDownloadResponse::clear_chunksize() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (size_case() == kChunkSize) {
+    _impl_.size_.chunksize_ = ::int64_t{0};
+    clear_has_size();
+  }
+}
+inline ::int64_t FileDownloadResponse::chunksize() const {
+  // @@protoc_insertion_point(field_get:MyPackage.FileDownloadResponse.chunkSize)
+  return _internal_chunksize();
+}
+inline void FileDownloadResponse::set_chunksize(::int64_t value) {
+  _internal_set_chunksize(value);
+  // @@protoc_insertion_point(field_set:MyPackage.FileDownloadResponse.chunkSize)
+}
+inline ::int64_t FileDownloadResponse::_internal_chunksize() const {
+  if (size_case() == kChunkSize) {
+    return _impl_.size_.chunksize_;
+  }
+  return ::int64_t{0};
+}
+inline void FileDownloadResponse::_internal_set_chunksize(::int64_t value) {
+  if (size_case() != kChunkSize) {
+    clear_size();
+    set_has_chunksize();
+  }
+  _impl_.size_.chunksize_ = value;
+}
+
+// bytes chunk = 3;
+inline void FileDownloadResponse::clear_chunk() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.chunk_.ClearToEmpty();
+}
+inline const std::string& FileDownloadResponse::chunk() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:MyPackage.FileDownloadResponse.chunk)
+  return _internal_chunk();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void FileDownloadResponse::set_chunk(Arg_&& arg,
+                                                     Args_... args) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.chunk_.SetBytes(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:MyPackage.FileDownloadResponse.chunk)
+}
+inline std::string* FileDownloadResponse::mutable_chunk() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_chunk();
+  // @@protoc_insertion_point(field_mutable:MyPackage.FileDownloadResponse.chunk)
+  return _s;
+}
+inline const std::string& FileDownloadResponse::_internal_chunk() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.chunk_.Get();
+}
+inline void FileDownloadResponse::_internal_set_chunk(const std::string& value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.chunk_.Set(value, GetArena());
+}
+inline std::string* FileDownloadResponse::_internal_mutable_chunk() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  return _impl_.chunk_.Mutable( GetArena());
+}
+inline std::string* FileDownloadResponse::release_chunk() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:MyPackage.FileDownloadResponse.chunk)
+  return _impl_.chunk_.Release();
+}
+inline void FileDownloadResponse::set_allocated_chunk(std::string* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.chunk_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.chunk_.IsDefault()) {
+          _impl_.chunk_.Set("", GetArena());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:MyPackage.FileDownloadResponse.chunk)
+}
+
+inline bool FileDownloadResponse::has_size() const {
+  return size_case() != SIZE_NOT_SET;
+}
+inline void FileDownloadResponse::clear_has_size() {
+  _impl_._oneof_case_[0] = SIZE_NOT_SET;
+}
+inline FileDownloadResponse::SizeCase FileDownloadResponse::size_case() const {
+  return FileDownloadResponse::SizeCase(_impl_._oneof_case_[0]);
+}
 // -------------------------------------------------------------------
 
 // FileInfo
@@ -2396,334 +3147,134 @@ inline void FileSearchResponse::_internal_set_ok(bool value) {
 
 // -------------------------------------------------------------------
 
-// FileUploadRequest
+// SyncRecordRequest
 
-// int64 fileSize = 1;
-inline bool FileUploadRequest::has_filesize() const {
-  return size_case() == kFileSize;
-}
-inline void FileUploadRequest::set_has_filesize() {
-  _impl_._oneof_case_[0] = kFileSize;
-}
-inline void FileUploadRequest::clear_filesize() {
+// int64 anchorTime = 1;
+inline void SyncRecordRequest::clear_anchortime() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  if (size_case() == kFileSize) {
-    _impl_.size_.filesize_ = ::int64_t{0};
-    clear_has_size();
-  }
+  _impl_.anchortime_ = ::int64_t{0};
 }
-inline ::int64_t FileUploadRequest::filesize() const {
-  // @@protoc_insertion_point(field_get:MyPackage.FileUploadRequest.fileSize)
-  return _internal_filesize();
+inline ::int64_t SyncRecordRequest::anchortime() const {
+  // @@protoc_insertion_point(field_get:MyPackage.SyncRecordRequest.anchorTime)
+  return _internal_anchortime();
 }
-inline void FileUploadRequest::set_filesize(::int64_t value) {
-  _internal_set_filesize(value);
-  // @@protoc_insertion_point(field_set:MyPackage.FileUploadRequest.fileSize)
+inline void SyncRecordRequest::set_anchortime(::int64_t value) {
+  _internal_set_anchortime(value);
+  // @@protoc_insertion_point(field_set:MyPackage.SyncRecordRequest.anchorTime)
 }
-inline ::int64_t FileUploadRequest::_internal_filesize() const {
-  if (size_case() == kFileSize) {
-    return _impl_.size_.filesize_;
-  }
-  return ::int64_t{0};
+inline ::int64_t SyncRecordRequest::_internal_anchortime() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.anchortime_;
 }
-inline void FileUploadRequest::_internal_set_filesize(::int64_t value) {
-  if (size_case() != kFileSize) {
-    clear_size();
-    set_has_filesize();
-  }
-  _impl_.size_.filesize_ = value;
+inline void SyncRecordRequest::_internal_set_anchortime(::int64_t value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.anchortime_ = value;
 }
 
-// int64 chunkSize = 2;
-inline bool FileUploadRequest::has_chunksize() const {
-  return size_case() == kChunkSize;
-}
-inline void FileUploadRequest::set_has_chunksize() {
-  _impl_._oneof_case_[0] = kChunkSize;
-}
-inline void FileUploadRequest::clear_chunksize() {
+// -------------------------------------------------------------------
+
+// SyncRecordResponse
+
+// .MyPackage.OperateType recordType = 1;
+inline void SyncRecordResponse::clear_recordtype() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  if (size_case() == kChunkSize) {
-    _impl_.size_.chunksize_ = ::int64_t{0};
-    clear_has_size();
-  }
+  _impl_.recordtype_ = 0;
 }
-inline ::int64_t FileUploadRequest::chunksize() const {
-  // @@protoc_insertion_point(field_get:MyPackage.FileUploadRequest.chunkSize)
-  return _internal_chunksize();
+inline ::MyPackage::OperateType SyncRecordResponse::recordtype() const {
+  // @@protoc_insertion_point(field_get:MyPackage.SyncRecordResponse.recordType)
+  return _internal_recordtype();
 }
-inline void FileUploadRequest::set_chunksize(::int64_t value) {
-  _internal_set_chunksize(value);
-  // @@protoc_insertion_point(field_set:MyPackage.FileUploadRequest.chunkSize)
+inline void SyncRecordResponse::set_recordtype(::MyPackage::OperateType value) {
+  _internal_set_recordtype(value);
+  // @@protoc_insertion_point(field_set:MyPackage.SyncRecordResponse.recordType)
 }
-inline ::int64_t FileUploadRequest::_internal_chunksize() const {
-  if (size_case() == kChunkSize) {
-    return _impl_.size_.chunksize_;
-  }
-  return ::int64_t{0};
+inline ::MyPackage::OperateType SyncRecordResponse::_internal_recordtype() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return static_cast<::MyPackage::OperateType>(_impl_.recordtype_);
 }
-inline void FileUploadRequest::_internal_set_chunksize(::int64_t value) {
-  if (size_case() != kChunkSize) {
-    clear_size();
-    set_has_chunksize();
-  }
-  _impl_.size_.chunksize_ = value;
+inline void SyncRecordResponse::_internal_set_recordtype(::MyPackage::OperateType value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.recordtype_ = value;
 }
 
-// bytes chunk = 3;
-inline void FileUploadRequest::clear_chunk() {
+// int64 recordTime = 2;
+inline void SyncRecordResponse::clear_recordtime() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  _impl_.chunk_.ClearToEmpty();
+  _impl_.recordtime_ = ::int64_t{0};
 }
-inline const std::string& FileUploadRequest::chunk() const
+inline ::int64_t SyncRecordResponse::recordtime() const {
+  // @@protoc_insertion_point(field_get:MyPackage.SyncRecordResponse.recordTime)
+  return _internal_recordtime();
+}
+inline void SyncRecordResponse::set_recordtime(::int64_t value) {
+  _internal_set_recordtime(value);
+  // @@protoc_insertion_point(field_set:MyPackage.SyncRecordResponse.recordTime)
+}
+inline ::int64_t SyncRecordResponse::_internal_recordtime() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.recordtime_;
+}
+inline void SyncRecordResponse::_internal_set_recordtime(::int64_t value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.recordtime_ = value;
+}
+
+// string msg = 3;
+inline void SyncRecordResponse::clear_msg() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.msg_.ClearToEmpty();
+}
+inline const std::string& SyncRecordResponse::msg() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:MyPackage.FileUploadRequest.chunk)
-  return _internal_chunk();
+  // @@protoc_insertion_point(field_get:MyPackage.SyncRecordResponse.msg)
+  return _internal_msg();
 }
 template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void FileUploadRequest::set_chunk(Arg_&& arg,
+inline PROTOBUF_ALWAYS_INLINE void SyncRecordResponse::set_msg(Arg_&& arg,
                                                      Args_... args) {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
   ;
-  _impl_.chunk_.SetBytes(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:MyPackage.FileUploadRequest.chunk)
+  _impl_.msg_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:MyPackage.SyncRecordResponse.msg)
 }
-inline std::string* FileUploadRequest::mutable_chunk() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_chunk();
-  // @@protoc_insertion_point(field_mutable:MyPackage.FileUploadRequest.chunk)
+inline std::string* SyncRecordResponse::mutable_msg() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_msg();
+  // @@protoc_insertion_point(field_mutable:MyPackage.SyncRecordResponse.msg)
   return _s;
 }
-inline const std::string& FileUploadRequest::_internal_chunk() const {
+inline const std::string& SyncRecordResponse::_internal_msg() const {
   PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
-  return _impl_.chunk_.Get();
+  return _impl_.msg_.Get();
 }
-inline void FileUploadRequest::_internal_set_chunk(const std::string& value) {
+inline void SyncRecordResponse::_internal_set_msg(const std::string& value) {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
   ;
-  _impl_.chunk_.Set(value, GetArena());
+  _impl_.msg_.Set(value, GetArena());
 }
-inline std::string* FileUploadRequest::_internal_mutable_chunk() {
+inline std::string* SyncRecordResponse::_internal_mutable_msg() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
   ;
-  return _impl_.chunk_.Mutable( GetArena());
+  return _impl_.msg_.Mutable( GetArena());
 }
-inline std::string* FileUploadRequest::release_chunk() {
+inline std::string* SyncRecordResponse::release_msg() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  // @@protoc_insertion_point(field_release:MyPackage.FileUploadRequest.chunk)
-  return _impl_.chunk_.Release();
+  // @@protoc_insertion_point(field_release:MyPackage.SyncRecordResponse.msg)
+  return _impl_.msg_.Release();
 }
-inline void FileUploadRequest::set_allocated_chunk(std::string* value) {
+inline void SyncRecordResponse::set_allocated_msg(std::string* value) {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  _impl_.chunk_.SetAllocated(value, GetArena());
+  _impl_.msg_.SetAllocated(value, GetArena());
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-        if (_impl_.chunk_.IsDefault()) {
-          _impl_.chunk_.Set("", GetArena());
+        if (_impl_.msg_.IsDefault()) {
+          _impl_.msg_.Set("", GetArena());
         }
   #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:MyPackage.FileUploadRequest.chunk)
+  // @@protoc_insertion_point(field_set_allocated:MyPackage.SyncRecordResponse.msg)
 }
 
-inline bool FileUploadRequest::has_size() const {
-  return size_case() != SIZE_NOT_SET;
-}
-inline void FileUploadRequest::clear_has_size() {
-  _impl_._oneof_case_[0] = SIZE_NOT_SET;
-}
-inline FileUploadRequest::SizeCase FileUploadRequest::size_case() const {
-  return FileUploadRequest::SizeCase(_impl_._oneof_case_[0]);
-}
-// -------------------------------------------------------------------
-
-// FileUploadResponse
-
-// int64 cacheId = 1;
-inline void FileUploadResponse::clear_cacheid() {
-  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  _impl_.cacheid_ = ::int64_t{0};
-}
-inline ::int64_t FileUploadResponse::cacheid() const {
-  // @@protoc_insertion_point(field_get:MyPackage.FileUploadResponse.cacheId)
-  return _internal_cacheid();
-}
-inline void FileUploadResponse::set_cacheid(::int64_t value) {
-  _internal_set_cacheid(value);
-  // @@protoc_insertion_point(field_set:MyPackage.FileUploadResponse.cacheId)
-}
-inline ::int64_t FileUploadResponse::_internal_cacheid() const {
-  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
-  return _impl_.cacheid_;
-}
-inline void FileUploadResponse::_internal_set_cacheid(::int64_t value) {
-  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  ;
-  _impl_.cacheid_ = value;
-}
-
-// -------------------------------------------------------------------
-
-// FileDownloadRequest
-
-// int64 fileId = 1;
-inline void FileDownloadRequest::clear_fileid() {
-  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  _impl_.fileid_ = ::int64_t{0};
-}
-inline ::int64_t FileDownloadRequest::fileid() const {
-  // @@protoc_insertion_point(field_get:MyPackage.FileDownloadRequest.fileId)
-  return _internal_fileid();
-}
-inline void FileDownloadRequest::set_fileid(::int64_t value) {
-  _internal_set_fileid(value);
-  // @@protoc_insertion_point(field_set:MyPackage.FileDownloadRequest.fileId)
-}
-inline ::int64_t FileDownloadRequest::_internal_fileid() const {
-  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
-  return _impl_.fileid_;
-}
-inline void FileDownloadRequest::_internal_set_fileid(::int64_t value) {
-  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  ;
-  _impl_.fileid_ = value;
-}
-
-// -------------------------------------------------------------------
-
-// FileDownloadResponse
-
-// int64 fileSize = 1;
-inline bool FileDownloadResponse::has_filesize() const {
-  return size_case() == kFileSize;
-}
-inline void FileDownloadResponse::set_has_filesize() {
-  _impl_._oneof_case_[0] = kFileSize;
-}
-inline void FileDownloadResponse::clear_filesize() {
-  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  if (size_case() == kFileSize) {
-    _impl_.size_.filesize_ = ::int64_t{0};
-    clear_has_size();
-  }
-}
-inline ::int64_t FileDownloadResponse::filesize() const {
-  // @@protoc_insertion_point(field_get:MyPackage.FileDownloadResponse.fileSize)
-  return _internal_filesize();
-}
-inline void FileDownloadResponse::set_filesize(::int64_t value) {
-  _internal_set_filesize(value);
-  // @@protoc_insertion_point(field_set:MyPackage.FileDownloadResponse.fileSize)
-}
-inline ::int64_t FileDownloadResponse::_internal_filesize() const {
-  if (size_case() == kFileSize) {
-    return _impl_.size_.filesize_;
-  }
-  return ::int64_t{0};
-}
-inline void FileDownloadResponse::_internal_set_filesize(::int64_t value) {
-  if (size_case() != kFileSize) {
-    clear_size();
-    set_has_filesize();
-  }
-  _impl_.size_.filesize_ = value;
-}
-
-// int64 chunkSize = 2;
-inline bool FileDownloadResponse::has_chunksize() const {
-  return size_case() == kChunkSize;
-}
-inline void FileDownloadResponse::set_has_chunksize() {
-  _impl_._oneof_case_[0] = kChunkSize;
-}
-inline void FileDownloadResponse::clear_chunksize() {
-  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  if (size_case() == kChunkSize) {
-    _impl_.size_.chunksize_ = ::int64_t{0};
-    clear_has_size();
-  }
-}
-inline ::int64_t FileDownloadResponse::chunksize() const {
-  // @@protoc_insertion_point(field_get:MyPackage.FileDownloadResponse.chunkSize)
-  return _internal_chunksize();
-}
-inline void FileDownloadResponse::set_chunksize(::int64_t value) {
-  _internal_set_chunksize(value);
-  // @@protoc_insertion_point(field_set:MyPackage.FileDownloadResponse.chunkSize)
-}
-inline ::int64_t FileDownloadResponse::_internal_chunksize() const {
-  if (size_case() == kChunkSize) {
-    return _impl_.size_.chunksize_;
-  }
-  return ::int64_t{0};
-}
-inline void FileDownloadResponse::_internal_set_chunksize(::int64_t value) {
-  if (size_case() != kChunkSize) {
-    clear_size();
-    set_has_chunksize();
-  }
-  _impl_.size_.chunksize_ = value;
-}
-
-// bytes chunk = 3;
-inline void FileDownloadResponse::clear_chunk() {
-  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  _impl_.chunk_.ClearToEmpty();
-}
-inline const std::string& FileDownloadResponse::chunk() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:MyPackage.FileDownloadResponse.chunk)
-  return _internal_chunk();
-}
-template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void FileDownloadResponse::set_chunk(Arg_&& arg,
-                                                     Args_... args) {
-  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  ;
-  _impl_.chunk_.SetBytes(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:MyPackage.FileDownloadResponse.chunk)
-}
-inline std::string* FileDownloadResponse::mutable_chunk() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_chunk();
-  // @@protoc_insertion_point(field_mutable:MyPackage.FileDownloadResponse.chunk)
-  return _s;
-}
-inline const std::string& FileDownloadResponse::_internal_chunk() const {
-  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
-  return _impl_.chunk_.Get();
-}
-inline void FileDownloadResponse::_internal_set_chunk(const std::string& value) {
-  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  ;
-  _impl_.chunk_.Set(value, GetArena());
-}
-inline std::string* FileDownloadResponse::_internal_mutable_chunk() {
-  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  ;
-  return _impl_.chunk_.Mutable( GetArena());
-}
-inline std::string* FileDownloadResponse::release_chunk() {
-  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  // @@protoc_insertion_point(field_release:MyPackage.FileDownloadResponse.chunk)
-  return _impl_.chunk_.Release();
-}
-inline void FileDownloadResponse::set_allocated_chunk(std::string* value) {
-  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  _impl_.chunk_.SetAllocated(value, GetArena());
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-        if (_impl_.chunk_.IsDefault()) {
-          _impl_.chunk_.Set("", GetArena());
-        }
-  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:MyPackage.FileDownloadResponse.chunk)
-}
-
-inline bool FileDownloadResponse::has_size() const {
-  return size_case() != SIZE_NOT_SET;
-}
-inline void FileDownloadResponse::clear_has_size() {
-  _impl_._oneof_case_[0] = SIZE_NOT_SET;
-}
-inline FileDownloadResponse::SizeCase FileDownloadResponse::size_case() const {
-  return FileDownloadResponse::SizeCase(_impl_._oneof_case_[0]);
-}
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
 #endif  // __GNUC__
@@ -2731,6 +3282,19 @@ inline FileDownloadResponse::SizeCase FileDownloadResponse::size_case() const {
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace MyPackage
 
+
+namespace google {
+namespace protobuf {
+
+template <>
+struct is_proto_enum<::MyPackage::OperateType> : std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor<::MyPackage::OperateType>() {
+  return ::MyPackage::OperateType_descriptor();
+}
+
+}  // namespace protobuf
+}  // namespace google
 
 // @@protoc_insertion_point(global_scope)
 

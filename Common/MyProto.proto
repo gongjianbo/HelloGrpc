@@ -1,48 +1,6 @@
 syntax = "proto3";
 package MyPackage;
 
-// 文件信息
-message FileInfo {
-    // 文件id
-    int64 fileId = 1;
-    // 文件大小
-    int64 fileSize = 2;
-    // 更新时间
-    int64 updateTime = 3;
-    // 文件名
-    string fileName = 4;
-}
-
-// 文件操作请求
-message FileOperateRequest {
-    // 要操作的文件信息
-    FileInfo info = 1;
-    // 缓存文件id
-    int64 cacheId = 2;
-}
-
-// 文件操作响应
-message FileOperateResponse {
-    // 操作后的文件信息
-    FileInfo info = 1;
-    // 操作结果
-    bool ok = 2;
-}
-
-// 文件搜索请求
-message FileSearchRequest {
-    // 搜索条件
-    string condition = 1;
-}
-
-// 文件搜索响应
-message FileSearchResponse {
-    // 搜索到的文件信息
-    repeated FileInfo infos = 1;
-    // 操作结果
-    bool ok = 2;
-}
-
 // 文件上传请求
 message FileUploadRequest {
     oneof size {
@@ -87,6 +45,48 @@ service MyFileService {
     rpc downloadFile (FileDownloadRequest) returns (stream FileDownloadResponse);
 }
 
+// 文件信息
+message FileInfo {
+    // 文件id
+    int64 fileId = 1;
+    // 文件大小
+    int64 fileSize = 2;
+    // 更新时间
+    int64 updateTime = 3;
+    // 文件名
+    string fileName = 4;
+}
+
+// 文件操作请求
+message FileOperateRequest {
+    // 要操作的文件信息
+    FileInfo info = 1;
+    // 缓存文件id
+    int64 cacheId = 2;
+}
+
+// 文件操作响应
+message FileOperateResponse {
+    // 操作后的文件信息
+    FileInfo info = 1;
+    // 操作结果
+    bool ok = 2;
+}
+
+// 文件搜索请求
+message FileSearchRequest {
+    // 搜索条件
+    string condition = 1;
+}
+
+// 文件搜索响应
+message FileSearchResponse {
+    // 搜索到的文件信息
+    repeated FileInfo infos = 1;
+    // 操作结果
+    bool ok = 2;
+}
+
 // 业务服务
 service MyOperateService {
     // 新增文件
@@ -99,4 +99,38 @@ service MyOperateService {
     rpc selectFile (FileOperateRequest) returns (FileOperateResponse);
     // 搜索文件
     rpc searchFile (FileSearchRequest) returns (FileSearchResponse);
+}
+
+// 操作类型
+enum OperateType {
+    // 文件新增
+    InsertFile = 0;
+    // 文件删除
+    DeleteFile = 1;
+    // 文件修改
+    UpdateFile = 2;
+}
+
+// 操作记录请求
+message SyncRecordRequest {
+    // 同步锚点时间
+    int64 anchorTime = 1;
+}
+
+// 操作记录响应
+message SyncRecordResponse {
+    // 操作类型
+    OperateType recordType = 1;
+    // 操作时间
+    int64 recordTime = 2;
+    // 提示信息
+    string msg = 3;
+}
+
+// 同步服务
+service MySyncService {
+    // 获取最新操作记录
+    rpc getRecord (SyncRecordRequest) returns (stream SyncRecordResponse);
+    // 服务器推送消息
+    rpc syncRecord (SyncRecordRequest) returns (stream SyncRecordResponse);
 }

@@ -1220,6 +1220,375 @@ class MyOperateService final {
   typedef WithStreamedUnaryMethod_insertFile<WithStreamedUnaryMethod_deleteFile<WithStreamedUnaryMethod_updateFile<WithStreamedUnaryMethod_selectFile<WithStreamedUnaryMethod_searchFile<Service > > > > > StreamedService;
 };
 
+// 同步服务
+class MySyncService final {
+ public:
+  static constexpr char const* service_full_name() {
+    return "MyPackage.MySyncService";
+  }
+  class StubInterface {
+   public:
+    virtual ~StubInterface() {}
+    // 获取最新操作记录
+    std::unique_ptr< ::grpc::ClientReaderInterface< ::MyPackage::SyncRecordResponse>> getRecord(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request) {
+      return std::unique_ptr< ::grpc::ClientReaderInterface< ::MyPackage::SyncRecordResponse>>(getRecordRaw(context, request));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::MyPackage::SyncRecordResponse>> AsyncgetRecord(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::MyPackage::SyncRecordResponse>>(AsyncgetRecordRaw(context, request, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::MyPackage::SyncRecordResponse>> PrepareAsyncgetRecord(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::MyPackage::SyncRecordResponse>>(PrepareAsyncgetRecordRaw(context, request, cq));
+    }
+    // 服务器推送消息
+    std::unique_ptr< ::grpc::ClientReaderInterface< ::MyPackage::SyncRecordResponse>> syncRecord(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request) {
+      return std::unique_ptr< ::grpc::ClientReaderInterface< ::MyPackage::SyncRecordResponse>>(syncRecordRaw(context, request));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::MyPackage::SyncRecordResponse>> AsyncsyncRecord(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::MyPackage::SyncRecordResponse>>(AsyncsyncRecordRaw(context, request, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::MyPackage::SyncRecordResponse>> PrepareAsyncsyncRecord(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::MyPackage::SyncRecordResponse>>(PrepareAsyncsyncRecordRaw(context, request, cq));
+    }
+    class async_interface {
+     public:
+      virtual ~async_interface() {}
+      // 获取最新操作记录
+      virtual void getRecord(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest* request, ::grpc::ClientReadReactor< ::MyPackage::SyncRecordResponse>* reactor) = 0;
+      // 服务器推送消息
+      virtual void syncRecord(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest* request, ::grpc::ClientReadReactor< ::MyPackage::SyncRecordResponse>* reactor) = 0;
+    };
+    typedef class async_interface experimental_async_interface;
+    virtual class async_interface* async() { return nullptr; }
+    class async_interface* experimental_async() { return async(); }
+   private:
+    virtual ::grpc::ClientReaderInterface< ::MyPackage::SyncRecordResponse>* getRecordRaw(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::MyPackage::SyncRecordResponse>* AsyncgetRecordRaw(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::MyPackage::SyncRecordResponse>* PrepareAsyncgetRecordRaw(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderInterface< ::MyPackage::SyncRecordResponse>* syncRecordRaw(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::MyPackage::SyncRecordResponse>* AsyncsyncRecordRaw(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::MyPackage::SyncRecordResponse>* PrepareAsyncsyncRecordRaw(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq) = 0;
+  };
+  class Stub final : public StubInterface {
+   public:
+    Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
+    std::unique_ptr< ::grpc::ClientReader< ::MyPackage::SyncRecordResponse>> getRecord(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request) {
+      return std::unique_ptr< ::grpc::ClientReader< ::MyPackage::SyncRecordResponse>>(getRecordRaw(context, request));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::MyPackage::SyncRecordResponse>> AsyncgetRecord(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::MyPackage::SyncRecordResponse>>(AsyncgetRecordRaw(context, request, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::MyPackage::SyncRecordResponse>> PrepareAsyncgetRecord(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::MyPackage::SyncRecordResponse>>(PrepareAsyncgetRecordRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientReader< ::MyPackage::SyncRecordResponse>> syncRecord(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request) {
+      return std::unique_ptr< ::grpc::ClientReader< ::MyPackage::SyncRecordResponse>>(syncRecordRaw(context, request));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::MyPackage::SyncRecordResponse>> AsyncsyncRecord(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::MyPackage::SyncRecordResponse>>(AsyncsyncRecordRaw(context, request, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::MyPackage::SyncRecordResponse>> PrepareAsyncsyncRecord(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::MyPackage::SyncRecordResponse>>(PrepareAsyncsyncRecordRaw(context, request, cq));
+    }
+    class async final :
+      public StubInterface::async_interface {
+     public:
+      void getRecord(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest* request, ::grpc::ClientReadReactor< ::MyPackage::SyncRecordResponse>* reactor) override;
+      void syncRecord(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest* request, ::grpc::ClientReadReactor< ::MyPackage::SyncRecordResponse>* reactor) override;
+     private:
+      friend class Stub;
+      explicit async(Stub* stub): stub_(stub) { }
+      Stub* stub() { return stub_; }
+      Stub* stub_;
+    };
+    class async* async() override { return &async_stub_; }
+
+   private:
+    std::shared_ptr< ::grpc::ChannelInterface> channel_;
+    class async async_stub_{this};
+    ::grpc::ClientReader< ::MyPackage::SyncRecordResponse>* getRecordRaw(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request) override;
+    ::grpc::ClientAsyncReader< ::MyPackage::SyncRecordResponse>* AsyncgetRecordRaw(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReader< ::MyPackage::SyncRecordResponse>* PrepareAsyncgetRecordRaw(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReader< ::MyPackage::SyncRecordResponse>* syncRecordRaw(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request) override;
+    ::grpc::ClientAsyncReader< ::MyPackage::SyncRecordResponse>* AsyncsyncRecordRaw(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReader< ::MyPackage::SyncRecordResponse>* PrepareAsyncsyncRecordRaw(::grpc::ClientContext* context, const ::MyPackage::SyncRecordRequest& request, ::grpc::CompletionQueue* cq) override;
+    const ::grpc::internal::RpcMethod rpcmethod_getRecord_;
+    const ::grpc::internal::RpcMethod rpcmethod_syncRecord_;
+  };
+  static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
+
+  class Service : public ::grpc::Service {
+   public:
+    Service();
+    virtual ~Service();
+    // 获取最新操作记录
+    virtual ::grpc::Status getRecord(::grpc::ServerContext* context, const ::MyPackage::SyncRecordRequest* request, ::grpc::ServerWriter< ::MyPackage::SyncRecordResponse>* writer);
+    // 服务器推送消息
+    virtual ::grpc::Status syncRecord(::grpc::ServerContext* context, const ::MyPackage::SyncRecordRequest* request, ::grpc::ServerWriter< ::MyPackage::SyncRecordResponse>* writer);
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_getRecord : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_getRecord() {
+      ::grpc::Service::MarkMethodAsync(0);
+    }
+    ~WithAsyncMethod_getRecord() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status getRecord(::grpc::ServerContext* /*context*/, const ::MyPackage::SyncRecordRequest* /*request*/, ::grpc::ServerWriter< ::MyPackage::SyncRecordResponse>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestgetRecord(::grpc::ServerContext* context, ::MyPackage::SyncRecordRequest* request, ::grpc::ServerAsyncWriter< ::MyPackage::SyncRecordResponse>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(0, context, request, writer, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_syncRecord : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_syncRecord() {
+      ::grpc::Service::MarkMethodAsync(1);
+    }
+    ~WithAsyncMethod_syncRecord() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status syncRecord(::grpc::ServerContext* /*context*/, const ::MyPackage::SyncRecordRequest* /*request*/, ::grpc::ServerWriter< ::MyPackage::SyncRecordResponse>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestsyncRecord(::grpc::ServerContext* context, ::MyPackage::SyncRecordRequest* request, ::grpc::ServerAsyncWriter< ::MyPackage::SyncRecordResponse>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(1, context, request, writer, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_getRecord<WithAsyncMethod_syncRecord<Service > > AsyncService;
+  template <class BaseClass>
+  class WithCallbackMethod_getRecord : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_getRecord() {
+      ::grpc::Service::MarkMethodCallback(0,
+          new ::grpc::internal::CallbackServerStreamingHandler< ::MyPackage::SyncRecordRequest, ::MyPackage::SyncRecordResponse>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::MyPackage::SyncRecordRequest* request) { return this->getRecord(context, request); }));
+    }
+    ~WithCallbackMethod_getRecord() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status getRecord(::grpc::ServerContext* /*context*/, const ::MyPackage::SyncRecordRequest* /*request*/, ::grpc::ServerWriter< ::MyPackage::SyncRecordResponse>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerWriteReactor< ::MyPackage::SyncRecordResponse>* getRecord(
+      ::grpc::CallbackServerContext* /*context*/, const ::MyPackage::SyncRecordRequest* /*request*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithCallbackMethod_syncRecord : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_syncRecord() {
+      ::grpc::Service::MarkMethodCallback(1,
+          new ::grpc::internal::CallbackServerStreamingHandler< ::MyPackage::SyncRecordRequest, ::MyPackage::SyncRecordResponse>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::MyPackage::SyncRecordRequest* request) { return this->syncRecord(context, request); }));
+    }
+    ~WithCallbackMethod_syncRecord() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status syncRecord(::grpc::ServerContext* /*context*/, const ::MyPackage::SyncRecordRequest* /*request*/, ::grpc::ServerWriter< ::MyPackage::SyncRecordResponse>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerWriteReactor< ::MyPackage::SyncRecordResponse>* syncRecord(
+      ::grpc::CallbackServerContext* /*context*/, const ::MyPackage::SyncRecordRequest* /*request*/)  { return nullptr; }
+  };
+  typedef WithCallbackMethod_getRecord<WithCallbackMethod_syncRecord<Service > > CallbackService;
+  typedef CallbackService ExperimentalCallbackService;
+  template <class BaseClass>
+  class WithGenericMethod_getRecord : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_getRecord() {
+      ::grpc::Service::MarkMethodGeneric(0);
+    }
+    ~WithGenericMethod_getRecord() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status getRecord(::grpc::ServerContext* /*context*/, const ::MyPackage::SyncRecordRequest* /*request*/, ::grpc::ServerWriter< ::MyPackage::SyncRecordResponse>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_syncRecord : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_syncRecord() {
+      ::grpc::Service::MarkMethodGeneric(1);
+    }
+    ~WithGenericMethod_syncRecord() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status syncRecord(::grpc::ServerContext* /*context*/, const ::MyPackage::SyncRecordRequest* /*request*/, ::grpc::ServerWriter< ::MyPackage::SyncRecordResponse>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_getRecord : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_getRecord() {
+      ::grpc::Service::MarkMethodRaw(0);
+    }
+    ~WithRawMethod_getRecord() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status getRecord(::grpc::ServerContext* /*context*/, const ::MyPackage::SyncRecordRequest* /*request*/, ::grpc::ServerWriter< ::MyPackage::SyncRecordResponse>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestgetRecord(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncWriter< ::grpc::ByteBuffer>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(0, context, request, writer, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_syncRecord : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_syncRecord() {
+      ::grpc::Service::MarkMethodRaw(1);
+    }
+    ~WithRawMethod_syncRecord() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status syncRecord(::grpc::ServerContext* /*context*/, const ::MyPackage::SyncRecordRequest* /*request*/, ::grpc::ServerWriter< ::MyPackage::SyncRecordResponse>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestsyncRecord(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncWriter< ::grpc::ByteBuffer>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(1, context, request, writer, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_getRecord : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_getRecord() {
+      ::grpc::Service::MarkMethodRawCallback(0,
+          new ::grpc::internal::CallbackServerStreamingHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const::grpc::ByteBuffer* request) { return this->getRecord(context, request); }));
+    }
+    ~WithRawCallbackMethod_getRecord() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status getRecord(::grpc::ServerContext* /*context*/, const ::MyPackage::SyncRecordRequest* /*request*/, ::grpc::ServerWriter< ::MyPackage::SyncRecordResponse>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerWriteReactor< ::grpc::ByteBuffer>* getRecord(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_syncRecord : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_syncRecord() {
+      ::grpc::Service::MarkMethodRawCallback(1,
+          new ::grpc::internal::CallbackServerStreamingHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const::grpc::ByteBuffer* request) { return this->syncRecord(context, request); }));
+    }
+    ~WithRawCallbackMethod_syncRecord() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status syncRecord(::grpc::ServerContext* /*context*/, const ::MyPackage::SyncRecordRequest* /*request*/, ::grpc::ServerWriter< ::MyPackage::SyncRecordResponse>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerWriteReactor< ::grpc::ByteBuffer>* syncRecord(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/)  { return nullptr; }
+  };
+  typedef Service StreamedUnaryService;
+  template <class BaseClass>
+  class WithSplitStreamingMethod_getRecord : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithSplitStreamingMethod_getRecord() {
+      ::grpc::Service::MarkMethodStreamed(0,
+        new ::grpc::internal::SplitServerStreamingHandler<
+          ::MyPackage::SyncRecordRequest, ::MyPackage::SyncRecordResponse>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerSplitStreamer<
+                     ::MyPackage::SyncRecordRequest, ::MyPackage::SyncRecordResponse>* streamer) {
+                       return this->StreamedgetRecord(context,
+                         streamer);
+                  }));
+    }
+    ~WithSplitStreamingMethod_getRecord() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status getRecord(::grpc::ServerContext* /*context*/, const ::MyPackage::SyncRecordRequest* /*request*/, ::grpc::ServerWriter< ::MyPackage::SyncRecordResponse>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with split streamed
+    virtual ::grpc::Status StreamedgetRecord(::grpc::ServerContext* context, ::grpc::ServerSplitStreamer< ::MyPackage::SyncRecordRequest,::MyPackage::SyncRecordResponse>* server_split_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithSplitStreamingMethod_syncRecord : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithSplitStreamingMethod_syncRecord() {
+      ::grpc::Service::MarkMethodStreamed(1,
+        new ::grpc::internal::SplitServerStreamingHandler<
+          ::MyPackage::SyncRecordRequest, ::MyPackage::SyncRecordResponse>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerSplitStreamer<
+                     ::MyPackage::SyncRecordRequest, ::MyPackage::SyncRecordResponse>* streamer) {
+                       return this->StreamedsyncRecord(context,
+                         streamer);
+                  }));
+    }
+    ~WithSplitStreamingMethod_syncRecord() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status syncRecord(::grpc::ServerContext* /*context*/, const ::MyPackage::SyncRecordRequest* /*request*/, ::grpc::ServerWriter< ::MyPackage::SyncRecordResponse>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with split streamed
+    virtual ::grpc::Status StreamedsyncRecord(::grpc::ServerContext* context, ::grpc::ServerSplitStreamer< ::MyPackage::SyncRecordRequest,::MyPackage::SyncRecordResponse>* server_split_streamer) = 0;
+  };
+  typedef WithSplitStreamingMethod_getRecord<WithSplitStreamingMethod_syncRecord<Service > > SplitStreamedService;
+  typedef WithSplitStreamingMethod_getRecord<WithSplitStreamingMethod_syncRecord<Service > > StreamedService;
+};
+
 }  // namespace MyPackage
 
 

@@ -1,5 +1,5 @@
-/bin
-/bin_d
+/bin*
+/build*
 
 .git
 .vs
